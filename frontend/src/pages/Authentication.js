@@ -11,7 +11,7 @@ export const action = async ({ request }) => {
   const searchParams = new URL(request.url).searchParams;
   const mode = searchParams.get("mode") || "login";
 
-  if (mode !== 'login' || mode !== 'signup') {
+  if (mode !== 'login' && mode !== 'signup') {
     throw json({message: 'Unsupported mode.'})
   }
   const data = await request.formData();
@@ -35,5 +35,5 @@ export const action = async ({ request }) => {
     return json({message: 'Could not authenticate User'}, {status: 500})
   };
 
-  return redirect('/')
+  return redirect('/');
 };
